@@ -26,14 +26,14 @@ class SpecialOffers extends StatelessWidget {
           child: Row(
             children: [
               SpecialOfferCard(
-                image: "assets/images/Image Banner 2.png",
-                category: "Smartphone",
+                image: "assets/products/Onions.png",
+                category: "Vegetables",
                 numOfBrands: 18,
                 press: () {},
               ),
               SpecialOfferCard(
-                image: "assets/images/Image Banner 3.png",
-                category: "Fashion",
+                image: "assets/products/ginger.png",
+                category: "Vegetables",
                 numOfBrands: 24,
                 press: () {},
               ),
@@ -104,7 +104,7 @@ class SpecialOfferCard extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        TextSpan(text: "$numOfBrands Brands")
+                        // TextSpan(text: "$numOfBrands Brands")
                       ],
                     ),
                   ),

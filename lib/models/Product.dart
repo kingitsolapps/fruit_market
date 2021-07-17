@@ -27,10 +27,10 @@ List<Product> demoProducts = [
   Product(
     id: 1,
     images: [
-      "assets/images/ps4_console_white_1.png",
-      "assets/images/ps4_console_white_2.png",
-      "assets/images/ps4_console_white_3.png",
-      "assets/images/ps4_console_white_4.png",
+      "assets/products/cauliflower_1.png",
+      "assets/products/cauliflower_2.png",
+      "assets/products/cauliflower_3.png",
+      "assets/products/cauliflower_4.png",
     ],
     colors: [
       Color(0xFFF6625E),
@@ -38,7 +38,7 @@ List<Product> demoProducts = [
       Color(0xFFDECB9C),
       Colors.white,
     ],
-    title: "Wireless Controller for PS4™",
+    title: "Cauliflower",
     price: 64.99,
     description: description,
     rating: 4.8,
@@ -48,7 +48,7 @@ List<Product> demoProducts = [
   Product(
     id: 2,
     images: [
-      "assets/images/Image Popular Product 2.png",
+      "assets/products/Onions.png",
     ],
     colors: [
       Color(0xFFF6625E),
@@ -56,8 +56,8 @@ List<Product> demoProducts = [
       Color(0xFFDECB9C),
       Colors.white,
     ],
-    title: "Nike Sport White - Man Pant",
-    price: 50.5,
+    title: "Onion",
+    price: 50.0,
     description: description,
     rating: 4.1,
     isPopular: true,
@@ -65,7 +65,7 @@ List<Product> demoProducts = [
   Product(
     id: 3,
     images: [
-      "assets/images/glap.png",
+      "assets/products/corn.png",
     ],
     colors: [
       Color(0xFFF6625E),
@@ -73,8 +73,8 @@ List<Product> demoProducts = [
       Color(0xFFDECB9C),
       Colors.white,
     ],
-    title: "Gloves XC Omega - Polygon",
-    price: 36.55,
+    title: "Corn",
+    price: 260.55,
     description: description,
     rating: 4.1,
     isFavourite: true,
@@ -83,7 +83,7 @@ List<Product> demoProducts = [
   Product(
     id: 4,
     images: [
-      "assets/images/wireless headset.png",
+      "assets/products/ginger.png",
     ],
     colors: [
       Color(0xFFF6625E),
@@ -91,8 +91,8 @@ List<Product> demoProducts = [
       Color(0xFFDECB9C),
       Colors.white,
     ],
-    title: "Logitech Head",
-    price: 20.20,
+    title: "Ginger",
+    price: 200.20,
     description: description,
     rating: 4.1,
     isFavourite: true,
@@ -100,4 +100,4 @@ List<Product> demoProducts = [
 ];
 
 const String description =
-    "Wireless Controller for PS4™ gives you what you want in your gaming from over precision control your games to sharing …";
+    "Sabzi dekho description ch ke rkhya a. Jeri kam de cheez a o check kro.............";

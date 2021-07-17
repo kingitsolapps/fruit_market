@@ -47,18 +47,21 @@ class CategoryCard extends StatelessWidget {
     return GestureDetector(
       onTap: press,
       child: SizedBox(
-        width: getProportionateScreenWidth(55),
+        width: getProportionateScreenWidth(60),
         child: Column(
           children: [
             Container(
               // padding: EdgeInsets.all(getProportionateScreenWidth(15)),
-              height: getProportionateScreenWidth(55),
-              width: getProportionateScreenWidth(55),
+              height: getProportionateScreenWidth(60),
+              width: getProportionateScreenWidth(60),
               decoration: BoxDecoration(
                 color: Color(0xFFFFECDF),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Image.asset(icon!),
+              child: Image.asset(
+                icon!,
+                fit: BoxFit.fill,
+              ),
               // SvgPicture.asset(icon!),
             ),
             SizedBox(height: 5),

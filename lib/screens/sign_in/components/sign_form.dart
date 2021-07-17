@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruit_market/screens/home/home_screen.dart';
 import 'package:get/get.dart';
 import '../../../components/custom_surfix_icon.dart';
 import '../../../components/form_error.dart';
@@ -84,7 +85,9 @@ class _SignFormState extends State<SignForm> {
           // ),
           MaterialButton(
             onPressed: () {
-              Get.snackbar('Wait', 'Working on it');
+              Get.offAll(
+                HomeScreen(),
+              );
             },
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
