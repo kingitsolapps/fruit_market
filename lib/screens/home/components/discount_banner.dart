@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruit_market/constants.dart';
 
 import '../../../size_config.dart';
 
@@ -18,14 +19,15 @@ class DiscountBanner extends StatelessWidget {
         vertical: getProportionateScreenWidth(15),
       ),
       decoration: BoxDecoration(
-        color: Color(0xFF4A3298),
+        // color: Color(0xFF4A3298),
+        color: kPrimaryColor,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Text.rich(
         TextSpan(
           style: TextStyle(color: Colors.white),
           children: [
-            TextSpan(text: "A Summer Surpise\n"),
+            TextSpan(text: "Surpise for first 200 Customers till 31 July\n"),
             TextSpan(
               text: "Cashback 20%",
               style: TextStyle(

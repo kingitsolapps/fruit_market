@@ -59,7 +59,7 @@ class _SplashBodyState extends State<SplashBody> {
                 ),
               ),
               Container(
-                height: (Get.height) * 0.358,
+                height: (Get.height) * 0.31,
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                       horizontal: getProportionateScreenWidth(20)),
