@@ -74,7 +74,7 @@ List<Product> demoProducts = [
       Colors.white,
     ],
     title: "Corn",
-    price: 260.55,
+    price: 260.5,
     description: description,
     rating: 4.1,
     isFavourite: true,

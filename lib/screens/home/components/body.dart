@@ -23,49 +23,21 @@ class Body extends StatelessWidget {
                 children: [
                   SizedBox(
                     child: Container(
-                      height: 100,
+                      height: 50,
                       color: kPrimaryColor,
                     ),
                   ),
                   Container(
                     // color: kPrimaryColor,
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Fruit Market',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Row(
-                                children: [
-                                  IconBtnWithCounter(
-                                    svgSrc: "assets/icons/Cart Icon.svg",
-                                    press: () => Navigator.pushNamed(
-                                        context, CartScreen.routeName),
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  IconBtnWithCounter(
-                                    svgSrc: "assets/icons/Bell.svg",
-                                    numOfitem: 3,
-                                    press: () {},
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
+                        // Padding(
+                        //   padding: EdgeInsets.all(10.0),
+                        //   child:
+                        // ),
                         SizedBox(
-                          height: 0,
+                          height: 20,
                         ),
                         SearchField(),
                       ],
