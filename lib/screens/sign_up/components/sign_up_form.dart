@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruit_market/models/signin_model.dart';
 import 'package:fruit_market/screens/home/home_screen.dart';
 import 'package:get/get.dart';
 import '../../../components/custom_surfix_icon.dart';
@@ -8,6 +9,7 @@ import '../../complete_profile/complete_profile_screen.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpForm extends StatefulWidget {
   @override
@@ -38,6 +40,8 @@ class _SignUpFormState extends State<SignUpForm> {
         errors.remove(error);
       });
   }
+
+  FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -70,17 +74,21 @@ class _SignUpFormState extends State<SignUpForm> {
           // ),
           MaterialButton(
             onPressed: () {
-              print('firstName=$firstName');
-              print('lastName=$lastName');
-              print('email=$email');
-              print('phone=$phone');
-              print('password=$password');
-              if (phone == "03027750114") {
-                Get.to(
-                  HomeScreen(),
-                );
-              } else {
-                Get.snackbar('Error', 'Please Check the phone number');
+              // if (phone == "03027750114") {
+              //   Get.to(
+              //     HomeScreen(),
+              //   );
+              // } else {
+              //   Get.snackbar('Error', 'Please Check the phone number');
+              // }
+              if (_formKey.currentState!.validate()) {
+                _formKey.currentState!.save();
+                // if all are valid then go to success screen
+                // Navigator.pushNamed(context, CompleteProfileScreen.routeName);
+                // Get.offAll(
+                //   HomeScreen(),
+                // );
+                SignUpWithEmailPassword();
               }
             },
             shape: RoundedRectangleBorder(
@@ -133,7 +141,15 @@ class _SignUpFormState extends State<SignUpForm> {
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
+        // suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
+        suffixIcon: IconButton(
+          onPressed: () {
+            // signInModal.passHideShow();
+          },
+          icon: Icon(
+            Icons.visibility_rounded,
+          ),
+        ),
       ),
     );
   }
@@ -166,7 +182,15 @@ class _SignUpFormState extends State<SignUpForm> {
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
+        // suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
+        suffixIcon: IconButton(
+          onPressed: () {
+            // signInModal.passHideShow();
+          },
+          icon: Icon(
+            Icons.visibility_rounded,
+          ),
+        ),
       ),
     );
   }
@@ -286,5 +310,23 @@ class _SignUpFormState extends State<SignUpForm> {
         suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/User.svg"),
       ),
     );
+  }
+
+  SignUpWithEmailPassword() async {
+    print(email);
+    print(password);
+    try {
+      final user = await _auth.createUserWithEmailAndPassword(
+          email: email!, password: password!);
+      if (user != null) {
+        Get.offAll(
+          HomeScreen(),
+        );
+      } else {
+        Get.defaultDialog(title: 'Error', middleText: 'Try Agiain');
+      }
+    } catch (e) {
+      Get.defaultDialog(title: "Error", middleText: e.toString());
+    }
   }
 }

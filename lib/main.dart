@@ -4,8 +4,14 @@ import './screens/profile/profile_screen.dart';
 import './screens/splash/splash_screen.dart';
 import './theme.dart';
 import 'package:get/get.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+// void main() {
+//   runApp(MyApp());
+// }
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 

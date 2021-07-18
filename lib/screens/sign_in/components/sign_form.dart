@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fruit_market/screens/home/home_screen.dart';
 import 'package:get/get.dart';
@@ -39,6 +40,7 @@ class _SignFormState extends State<SignForm> {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseAuth _auth = FirebaseAuth.instance;
     return Form(
       key: _formKey,
       child: Column(
@@ -84,10 +86,31 @@ class _SignFormState extends State<SignForm> {
           //   },
           // ),
           MaterialButton(
-            onPressed: () {
-              Get.offAll(
-                HomeScreen(),
-              );
+            onPressed: () async {
+              if (_formKey.currentState!.validate()) {
+                _formKey.currentState!.save();
+                // if all are valid then go to success screen
+                KeyboardUtil.hideKeyboard(context);
+                //       Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+                try {
+                  final user = await _auth.signInWithEmailAndPassword(
+                      email: email!, password: password!);
+                  if (user != null) {
+                    Get.offAll(HomeScreen());
+                  } else {
+                    Get.defaultDialog(
+                        title: 'Sorry',
+                        middleText:
+                            'Check your Email or password \nNo user found');
+                  }
+                } catch (e) {
+                  Get.defaultDialog(title: 'Error', middleText: e.toString());
+                }
+
+                // Get.offAll(
+                //   HomeScreen(),
+                // );
+              }
             },
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),

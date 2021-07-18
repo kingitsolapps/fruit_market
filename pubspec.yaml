@@ -31,6 +31,7 @@ dependencies:
   provider: ^4.3.1
   get: ^4.1.4
   intl_phone_field: ^2.0.1
+  firebase_auth: ^3.0.1
 
 dev_dependencies:
   flutter_test:
