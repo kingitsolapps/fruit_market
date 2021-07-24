@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../models/Product.dart';
@@ -57,6 +58,40 @@ class ProductCard extends StatelessWidget {
                 style: TextStyle(color: Colors.black),
                 maxLines: 2,
               ),
+              /////////////////
+              Row(
+                children: [
+                  // RatingBar.builder(
+                  //   tapOnlyMode: ,
+                  //   initialRating: 1.2,
+                  //   updateOnDrag: false,
+                  //   // minRating: 1,
+                  //   direction: Axis.horizontal,
+                  //   allowHalfRating: true,
+                  //   itemCount: 5,
+                  //   // itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                  //   itemBuilder: (context, _) => Icon(
+                  //     Icons.star,
+                  //     color: Colors.amber,
+                  //     size: 5,
+                  //   ),
+                  //   onRatingUpdate: (rating) {
+                  //     print(rating);
+                  //   },
+                  // ),
+                  RatingBarIndicator(
+                    rating: product!.rating!,
+                    itemBuilder: (context, index) => Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                    ),
+                    itemCount: 5,
+                    itemSize: 25.0,
+                    direction: Axis.horizontal,
+                  ),
+                ],
+              ),
+              ///////////////
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -64,7 +99,7 @@ class ProductCard extends StatelessWidget {
                     "Rs.${product!.price} /Kg",
                     style: TextStyle(
                       fontSize: getProportionateScreenWidth(18),
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w500,
                       color: kPrimaryColor,
                     ),
                   ),

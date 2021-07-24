@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../models/Product.dart';
@@ -70,7 +71,7 @@ class FavouritCard extends StatelessWidget {
 
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           product!.title!,
@@ -80,6 +81,16 @@ class FavouritCard extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                           maxLines: 2,
+                        ),
+                        RatingBarIndicator(
+                          rating: product!.rating!,
+                          itemBuilder: (context, index) => Icon(
+                            Icons.star,
+                            color: Colors.amber,
+                          ),
+                          itemCount: 5,
+                          itemSize: 20.0,
+                          direction: Axis.horizontal,
                         ),
                         Text(
                           "Rs.${product!.price} /Kg",
@@ -96,26 +107,45 @@ class FavouritCard extends StatelessWidget {
                     // ),
                   ],
                 ),
-                InkWell(
-                  borderRadius: BorderRadius.circular(50),
-                  onTap: () {},
-                  child: Container(
-                    padding: EdgeInsets.all(getProportionateScreenWidth(8)),
-                    height: getProportionateScreenWidth(30),
-                    width: getProportionateScreenWidth(30),
-                    decoration: BoxDecoration(
-                      color: product!.isFavourite!
-                          ? kPrimaryColor.withOpacity(0.15)
-                          : kSecondaryColor.withOpacity(0.1),
-                      shape: BoxShape.circle,
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    InkWell(
+                      borderRadius: BorderRadius.circular(50),
+                      onTap: () {},
+                      child: Container(
+                        padding: EdgeInsets.all(getProportionateScreenWidth(8)),
+                        height: getProportionateScreenWidth(30),
+                        width: getProportionateScreenWidth(30),
+                        decoration: BoxDecoration(
+                          color: product!.isFavourite!
+                              ? kPrimaryColor.withOpacity(0.15)
+                              : kSecondaryColor.withOpacity(0.1),
+                          shape: BoxShape.circle,
+                        ),
+                        child: SvgPicture.asset(
+                          "assets/icons/Heart Icon_2.svg",
+                          color: product!.isFavourite!
+                              ? Color(0xFFFF4848)
+                              : Color(0xFFDBDEE4),
+                        ),
+                      ),
                     ),
-                    child: SvgPicture.asset(
-                      "assets/icons/Heart Icon_2.svg",
-                      color: product!.isFavourite!
-                          ? Color(0xFFFF4848)
-                          : Color(0xFFDBDEE4),
+                    MaterialButton(
+                      onPressed: () {},
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      color: kPrimaryColor,
+                      child: Text(
+                        'Add',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ],
             ),
