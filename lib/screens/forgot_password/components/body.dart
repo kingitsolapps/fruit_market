@@ -8,6 +8,10 @@ import '../../../components/no_account_text.dart';
 import '../../../size_config.dart';
 
 import '../../../constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+FirebaseAuth _auth = FirebaseAuth.instance;
+String? email;
 
 class Body extends StatelessWidget {
   @override
@@ -71,8 +75,10 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
                 setState(() {
                   errors.remove(kInvalidEmailError);
                 });
+                // email = value;
               }
-              return null;
+              // return null;
+              email = value;
             },
             validator: (value) {
               if (value!.isEmpty && !errors.contains(kEmailNullError)) {
@@ -84,6 +90,7 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
                 setState(() {
                   errors.add(kInvalidEmailError);
                 });
+                // email = value;
               }
               return null;
             },
@@ -108,9 +115,24 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
           //   },
           // ),
           MaterialButton(
-            onPressed: () {
+            onPressed: () async {
+              if (_formKey.currentState!.validate()) {
+                print('email = $email');
+                //       // Do what you want to do
+                try {
+                  final user =
+                      await _auth.sendPasswordResetEmail(email: email!);
+                  // print();
+                  Get.defaultDialog(
+                      middleText: 'Check your email and change the password');
+                } catch (e) {
+                  print(e.toString());
+                  Get.defaultDialog(middleText: e.toString());
+                }
+              }
+
               // Get.snackbar('Wait', 'Working on it');
-              Get.to(OtpScreen());
+              // Get.to(OtpScreen());
             },
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
