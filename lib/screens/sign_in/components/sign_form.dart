@@ -126,7 +126,6 @@ class _SignFormState extends State<SignForm> {
             //       Navigator.pushNamed(context, LoginSuccessScreen.routeName);
             //     }
             //   },
-            //testing on it
             // ),
             MaterialButton(
               onPressed: () async {
@@ -136,7 +135,6 @@ class _SignFormState extends State<SignForm> {
                   KeyboardUtil.hideKeyboard(context);
                   //       Navigator.pushNamed(context, LoginSuccessScreen.routeName);
                   try {
-                    
                     final user = await _auth.signInWithEmailAndPassword(
                         email: email!, password: password!);
                     if (user != null) {
