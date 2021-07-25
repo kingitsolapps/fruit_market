@@ -36,7 +36,11 @@ class Body extends StatelessWidget {
               ProfileMenu(
                 text: "My Orders",
                 icon: "assets/icons/Gift Icon.svg",
-                press: () => {},
+                press: () => {
+                  Get.defaultDialog(
+                      middleText:
+                          'Wait This page is not added. Now working on it.'),
+                },
               ),
               ProfileMenu(
                 text: "Favourites",
@@ -82,7 +86,11 @@ class Body extends StatelessWidget {
               ProfileMenu(
                 text: "Refer a Friend",
                 icon: "assets/icons/share.svg",
-                press: () {},
+                press: () {
+                  Get.defaultDialog(
+                      middleText:
+                          'Wait This page is not added. Now working on it.');
+                },
               ),
               ProfileMenu(
                 text: "Help",
