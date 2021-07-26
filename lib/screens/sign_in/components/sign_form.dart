@@ -141,7 +141,7 @@ class _SignFormState extends State<SignForm> {
                       Get.offAll(HomeScreen());
                     } else {
                       Get.defaultDialog(
-                          title: 'Sorry',
+                          
                           middleText:
                               'Check your Email or password \nNo user found');
                     }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Product {
   final int? id;
-  final String? title, description;
+  final String? title, description, category;
   final List<String>? images;
   final List<Color>? colors;
   final double? rating, price;
@@ -18,6 +18,7 @@ class Product {
     @required this.title,
     @required this.price,
     @required this.description,
+    @required this.category,
   });
 }
 
@@ -39,6 +40,7 @@ List<Product> demoProducts = [
       Colors.white,
     ],
     title: "Cauliflower",
+    category: "vegetable",
     price: 64.99,
     description: description,
     rating: 4.8,
@@ -57,6 +59,7 @@ List<Product> demoProducts = [
       Colors.white,
     ],
     title: "Onion",
+    category: "vegetable",
     price: 50.0,
     description: description,
     rating: 4.1,
@@ -74,6 +77,7 @@ List<Product> demoProducts = [
       Colors.white,
     ],
     title: "Corn",
+    category: "dry_fruit",
     price: 260.5,
     description: description,
     rating: 4.1,
@@ -92,6 +96,7 @@ List<Product> demoProducts = [
       Colors.white,
     ],
     title: "Ginger",
+    category: "vegetable",
     price: 200.20,
     description: description,
     rating: 4.1,

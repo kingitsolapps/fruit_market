@@ -45,6 +45,7 @@ dependencies:
   google_sign_in: ^4.5.9
   flutter_rating_bar: ^4.0.0
   flutter_switch: ^0.3.2
+  category_picker: ^1.0.1
 
 dev_dependencies:
   flutter_test:
