@@ -133,6 +133,7 @@ class _SignFormState extends State<SignForm> {
                   _formKey.currentState!.save();
                   // if all are valid then go to success screen
                   KeyboardUtil.hideKeyboard(context);
+
                   //       Navigator.pushNamed(context, LoginSuccessScreen.routeName);
                   try {
                     final user = await _auth.signInWithEmailAndPassword(
@@ -141,9 +142,9 @@ class _SignFormState extends State<SignForm> {
                       Get.offAll(HomeScreen());
                     } else {
                       Get.defaultDialog(
-                          
-                          middleText:
-                              'Check your Email or password \nNo user found');
+                        middleText:
+                            'Check your Email or password \nNo user found',
+                      );
                     }
                   } catch (e) {
                     Get.defaultDialog(title: 'Error', middleText: e.toString());

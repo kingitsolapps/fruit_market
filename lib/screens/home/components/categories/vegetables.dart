@@ -1,23 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:fruit_market/models/Product.dart';
 import 'package:fruit_market/screens/home/components/categories/category_card.dart';
+import 'package:get/get.dart';
 
 import '../../../../size_config.dart';
 
 class Vegetables extends StatelessWidget {
-  const Vegetables({Key? key}) : super(key: key);
+  const Vegetables({
+    Key? key,
+    @required this.category,
+  }) : super(key: key);
+  final String? category;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 800,
+      height: Get.height * 0.7,
+      // getProportionateScreenHeight(500),
       child: ListView(
+        shrinkWrap: true,
+        physics: BouncingScrollPhysics(),
+        scrollDirection: Axis.vertical,
         children: [
           Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: getProportionateScreenWidth(20)),
             child: Text(
-              'Vegetables',
+              category!,
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 25,
@@ -34,7 +43,7 @@ class Vegetables extends StatelessWidget {
                 ...List.generate(
                   demoProducts.length,
                   (index) {
-                    if (demoProducts[index].category == 'vegetable')
+                    if (demoProducts[index].category == category!)
                       return CategoriesCard(product: demoProducts[index]);
 
                     return SizedBox

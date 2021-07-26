@@ -30,91 +30,97 @@ class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: SingleChildScrollView(
-        child: Container(
-          color: Colors.white,
-          child: Column(
-            children: [
-              Stack(
-                children: [
-                  SizedBox(
-                    child: Container(
-                      height: 50,
-                      color: kPrimaryColor,
-                    ),
+      child: Container(
+        color: Colors.white,
+        child: ListView(
+          shrinkWrap: true,
+          physics: AlwaysScrollableScrollPhysics(),
+          children: [
+            Stack(
+              children: [
+                SizedBox(
+                  child: Container(
+                    height: 50,
+                    color: kPrimaryColor,
                   ),
-                  Container(
-                    // color: kPrimaryColor,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        // Padding(
-                        //   padding: EdgeInsets.all(10.0),
-                        //   child:
-                        // ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        SearchField(),
-                      ],
-                    ),
+                ),
+                Container(
+                  // color: kPrimaryColor,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // Padding(
+                      //   padding: EdgeInsets.all(10.0),
+                      //   child:
+                      // ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      SearchField(),
+                    ],
                   ),
-                ],
-              ),
-              CategoryPicker(
-                items: [
-                  CategoryPickerItem(
-                    value: 'Home',
-                    label: 'Home',
-                  ),
-                  CategoryPickerItem(
-                    value: 'Vegetables',
-                    label: 'Vegetables',
-                  ),
-                  CategoryPickerItem(
-                    value: 'Fruits',
-                    label: 'Fruits',
-                  ),
-                  CategoryPickerItem(
-                    value: 'Dry-Fruits',
-                    label: 'Dry-Fruits',
-                  ),
-                ],
-                defaultSelected: 0,
-                onValueChanged: (value) {
-                  print(value.label);
-                  setState(() {
-                    pagevalue = value.label;
-                  });
-                },
-                backgroundColor: Colors.transparent,
-                selectedItemColor: kPrimaryColor,
-                unselectedItemColor: Colors.grey,
-                selectedItemBorderColor: Colors.transparent,
-                unselectedItemBorderColor: Colors.grey[800],
-                selectedItemTextDarkThemeColor: Colors.white,
-                selectedItemTextLightThemeColor: Colors.black,
-                unselectedItemTextDarkThemeColor: Colors.white,
-                unselectedItemTextLightThemeColor: Colors.white,
-                itemBorderRadius: BorderRadius.circular(30),
-                itemHeight: 32.0,
-                itemLabelFontSize: 16.0,
-                categoryPickerMargin: const EdgeInsets.symmetric(vertical: 11),
-                categoryPickerPadding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                itemMargin: const EdgeInsets.symmetric(horizontal: 4),
-                itemPadding: const EdgeInsets.symmetric(horizontal: 12),
-              ),
-              if (pagevalue == 'Home')
-                Home()
-              else if (pagevalue == 'Vegetables')
-                Vegetables()
-              else if (pagevalue == 'Fruits')
-                Fruits()
-              else if (pagevalue == 'Dry-Fruits')
-                DryFruits()
-            ],
-          ),
+                ),
+              ],
+            ),
+            CategoryPicker(
+              items: [
+                CategoryPickerItem(
+                  value: 'Home',
+                  label: 'Home',
+                ),
+                CategoryPickerItem(
+                  value: 'Vegetables',
+                  label: 'Vegetables',
+                ),
+                CategoryPickerItem(
+                  value: 'Fruits',
+                  label: 'Fruits',
+                ),
+                CategoryPickerItem(
+                  value: 'Dry-Fruits',
+                  label: 'Dry-Fruits',
+                ),
+              ],
+              defaultSelected: 0,
+              onValueChanged: (value) {
+                print(value.label);
+                setState(() {
+                  pagevalue = value.label;
+                });
+              },
+              backgroundColor: Colors.transparent,
+              selectedItemColor: kPrimaryColor,
+              unselectedItemColor: Colors.grey,
+              selectedItemBorderColor: Colors.transparent,
+              unselectedItemBorderColor: Colors.grey[800],
+              selectedItemTextDarkThemeColor: Colors.white,
+              selectedItemTextLightThemeColor: Colors.black,
+              unselectedItemTextDarkThemeColor: Colors.white,
+              unselectedItemTextLightThemeColor: Colors.white,
+              itemBorderRadius: BorderRadius.circular(30),
+              itemHeight: 32.0,
+              itemLabelFontSize: 16.0,
+              categoryPickerMargin: const EdgeInsets.symmetric(vertical: 11),
+              categoryPickerPadding:
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              itemMargin: const EdgeInsets.symmetric(horizontal: 4),
+              itemPadding: const EdgeInsets.symmetric(horizontal: 12),
+            ),
+            if (pagevalue == 'Home')
+              Home()
+            else
+              Vegetables(
+                category: pagevalue,
+              )
+            // else if (pagevalue == 'Fruits')
+            //   Vegetables(
+            //     category: pagevalue,
+            //   )
+            // else if (pagevalue == 'Dry-Fruits')
+            //   Vegetables(
+            //     category: pagevalue,
+            //   )
+          ],
         ),
       ),
     );

@@ -24,7 +24,7 @@ class CategoriesCard extends StatelessWidget {
       padding: EdgeInsets.all(getProportionateScreenWidth(10)),
       child: SizedBox(
         // width: getProportionateScreenWidth(width!),
-        width: (Get.width) - 50,
+        // width: (Get.width) - 50,
         height: 100,
         child: GestureDetector(
           onTap: () {

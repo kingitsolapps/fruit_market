@@ -22,6 +22,12 @@ class UserSignInProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool confPasswordSecure = false;
+  confPassHideShow() {
+    confPasswordSecure ? confPasswordSecure = false : confPasswordSecure = true;
+    notifyListeners();
+  }
+
   signOutUser() {
     Get.offAll(
       SignInScreen(),

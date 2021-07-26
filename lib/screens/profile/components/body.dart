@@ -19,7 +19,7 @@ class Body extends StatelessWidget {
     return Consumer<UserSignInProvider>(
       builder: (context, signInModal, _) {
         return SingleChildScrollView(
-          padding: EdgeInsets.symmetric(vertical: 20),
+          // padding: EdgeInsets.symmetric(vertical: 20),
           child: Column(
             children: [
               ProfilePic(),

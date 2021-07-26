@@ -100,7 +100,7 @@ class _SignUpFormState extends State<SignUpForm> {
             SizedBox(height: getProportionateScreenHeight(30)),
             // buildConformPassFormField(),
             TextFormField(
-              obscureText: signInModal.passwordSecure ? false : true,
+              obscureText: signInModal.confPasswordSecure ? false : true,
               onSaved: (newValue) => conform_password = newValue,
               onChanged: (value) {
                 if (value.isNotEmpty) {
@@ -129,10 +129,10 @@ class _SignUpFormState extends State<SignUpForm> {
                 // suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
                 suffixIcon: IconButton(
                   onPressed: () {
-                    signInModal.passHideShow();
+                    signInModal.confPassHideShow();
                   },
                   icon: Icon(
-                    signInModal.passwordSecure
+                    signInModal.confPasswordSecure
                         ? Icons.visibility_off
                         : Icons.visibility,
                     // size: 20,
