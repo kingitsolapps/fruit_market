@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fruit_market/providers/userLoginProvider.dart';
 import 'package:fruit_market/screens/home/home_screen.dart';
+import 'package:fruit_market/screens/sign_in/sign_in_screen.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import '../../../components/custom_surfix_icon.dart';
@@ -8,6 +9,7 @@ import '../../../components/form_error.dart';
 import '../../../constants.dart';
 import '../../../size_config.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 
 class SignUpForm extends StatefulWidget {
   @override
@@ -23,6 +25,7 @@ class _SignUpFormState extends State<SignUpForm> {
   String? firstName;
   String? lastName;
   bool remember = false;
+
   final List<String> errors = [];
 
   void addError({String? error}) {
@@ -48,6 +51,7 @@ class _SignUpFormState extends State<SignUpForm> {
         key: _formKey,
         child: Column(
           children: [
+           
             buildFirstNameFormField(),
             SizedBox(height: getProportionateScreenHeight(30)),
             buildLastNameFormField(),
@@ -326,8 +330,10 @@ class _SignUpFormState extends State<SignUpForm> {
       final user = await _auth.createUserWithEmailAndPassword(
           email: email!, password: password!);
       if (user != null) {
+        Get.snackbar('Success', 'Your account created successfully');
+
         Get.offAll(
-          HomeScreen(),
+          SignInScreen(),
         );
       } else {
         Get.defaultDialog(title: 'Error', middleText: 'Try Agiain');

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fruit_market/screens/payment_screen/payment_screen.dart';
+import 'package:get/get.dart';
 import '../../../components/default_button.dart';
 
 import '../../../constants.dart';
@@ -76,9 +78,14 @@ class CheckoutCard extends StatelessWidget {
                 ),
                 SizedBox(
                   width: getProportionateScreenWidth(180),
-                  child: DefaultButton(
-                    text: "Check Out",
-                    // press: () {},
+                  child: InkWell(
+                    onTap: () {
+                      Get.defaultDialog(middleText: 'Pressed');
+                    },
+                    child: DefaultButton(
+                      text: "Check Out",
+                      // press: () {},
+                    ),
                   ),
                 ),
               ],

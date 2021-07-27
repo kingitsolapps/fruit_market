@@ -17,20 +17,20 @@ class _BodyState extends State<Body> {
       shrinkWrap: true,
       physics: BouncingScrollPhysics(),
       children: [
-        Padding(
-          padding:
-              EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-          child: Text(
-            'Your Favourits',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          // SectionTitle(title: "Your Favourits", press: () {}),
-        ),
-        SizedBox(height: getProportionateScreenWidth(20)),
+        // Padding(
+        //   padding:
+        //       EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+        //   child: Text(
+        //     'Your Favourits',
+        //     style: TextStyle(
+        //       color: Colors.black,
+        //       fontSize: 25,
+        //       fontWeight: FontWeight.bold,
+        //     ),
+        //   ),
+        //   // SectionTitle(title: "Your Favourits", press: () {}),
+        // ),
+        // SizedBox(height: getProportionateScreenWidth(20)),
         SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(

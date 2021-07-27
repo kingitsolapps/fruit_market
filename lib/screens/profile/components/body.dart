@@ -4,6 +4,7 @@ import 'package:fruit_market/screens/cart/cart_screen.dart';
 import 'package:fruit_market/screens/favourite/favourite_screen.dart';
 import 'package:fruit_market/screens/profile/pages/account.dart';
 import 'package:fruit_market/screens/profile/pages/help.dart';
+import 'package:fruit_market/screens/profile/pages/my_orders.dart';
 import 'package:fruit_market/screens/profile/pages/notification_setting.dart';
 import 'package:fruit_market/screens/profile/pages/rate_us.dart';
 import 'package:fruit_market/screens/profile/pages/settings.dart';
@@ -37,9 +38,9 @@ class Body extends StatelessWidget {
                 text: "My Orders",
                 icon: "assets/icons/Gift Icon.svg",
                 press: () => {
-                  Get.defaultDialog(
-                      middleText:
-                          'Wait This page is not added. Now working on it.'),
+                  Get.to(
+                    MyOrders(),
+                  ),
                 },
               ),
               ProfileMenu(

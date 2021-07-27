@@ -21,7 +21,7 @@ class CartScreen extends StatelessWidget {
         children: [
           Text(
             "Your Cart",
-            style: TextStyle(color: Colors.black),
+            // style: TextStyle(color: Colors.black),
           ),
           Text(
             "${demoCarts.length} items",
