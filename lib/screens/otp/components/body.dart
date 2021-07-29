@@ -6,6 +6,9 @@ import '../../../size_config.dart';
 import 'otp_form.dart';
 
 class Body extends StatelessWidget {
+  final String? phone;
+  Body(this.phone);
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -21,9 +24,14 @@ class Body extends StatelessWidget {
                 "OTP Verification",
                 style: headingStyle,
               ),
-              Text("We sent your code to +1 898 860 ***"),
+              Text("We sent your code to +92 ${phone}"),
               buildTimer(),
-              OtpForm(),
+              OtpForm(phone: phone),
+              // SizedBox(
+              //   height: 51,
+              // ),
+
+              //
               SizedBox(height: SizeConfig.screenHeight! * 0.1),
               GestureDetector(
                 onTap: () {
@@ -49,8 +57,8 @@ class Body extends StatelessWidget {
         TweenAnimationBuilder(
           tween: Tween(begin: 30.0, end: 0.0),
           duration: Duration(seconds: 30),
-          builder: (_, value, child) => Text(
-            "00:${value!}",
+          builder: (_, double? value, child) => Text(
+            "00:${value!.toStringAsFixed(0)}",
             style: TextStyle(color: kPrimaryColor),
           ),
         ),

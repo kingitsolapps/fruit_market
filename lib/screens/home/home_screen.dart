@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:fruit_market/constants.dart';
 import 'package:fruit_market/screens/cart/cart_screen.dart';
+import 'package:fruit_market/screens/notifications/notification_screen.dart';
 import '../../components/coustom_bottom_nav_bar.dart';
 import '../../enums.dart';
 
 import 'components/body.dart';
 import 'components/icon_btn_with_counter.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
   static String routeName = "/home";
@@ -38,7 +40,11 @@ class HomeScreen extends StatelessWidget {
                 IconBtnWithCounter(
                   svgSrc: "assets/icons/Bell.svg",
                   numOfitem: 3,
-                  press: () {},
+                  press: () {
+                    Get.to(
+                      NotificationScreen(),
+                    );
+                  },
                 ),
               ],
             ),

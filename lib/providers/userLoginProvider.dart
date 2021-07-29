@@ -2,11 +2,13 @@ import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:fruit_market/models/Cart.dart';
 import 'package:fruit_market/screens/sign_in/sign_in_screen.dart';
 // import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/material.dart';
+import 'package:fruit_market/models/Cart.dart';
 // import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 // import 'package:http/http.dart';
 // import 'package:mobi_movers/apis.dart';
@@ -17,6 +19,9 @@ class UserSignInProvider extends ChangeNotifier {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   bool passwordSecure = false;
+  int unitValue = 1;
+  double? totalamount = 0;
+  double? grandTotal = 0;
   passHideShow() {
     passwordSecure ? passwordSecure = false : passwordSecure = true;
     notifyListeners();
@@ -28,10 +33,63 @@ class UserSignInProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  plusUnitValue() {
+    unitValue += 1;
+    notifyListeners();
+  }
+
+  minusUnitValue() {
+    if (unitValue > 1) {
+      unitValue -= 1;
+      notifyListeners();
+    }
+  }
+
+  resetUnitValue() {
+    unitValue = 1;
+  }
+
+  resetTotalAmount() {
+    totalamount = 0;
+    grandTotal = 0;
+  }
+
+  priceTotal(price, int items) {
+    double total = price * items;
+    totalAmoutOfShoping(total);
+    notifyListeners();
+    return total.toStringAsFixed(2);
+  }
+
+  amountTotal(totalPrice) {
+    double total = totalamount! + totalPrice;
+    totalamount = total;
+    notifyListeners();
+    // totalAmoutOfShoping();
+  }
+
+  double? totalAmoutOfShoping(total) {
+    grandTotal = totalamount! + total;
+    totalamount = grandTotal;
+    notifyListeners();
+    return totalamount;
+  }
+
   signOutUser() {
     Get.offAll(
       SignInScreen(),
     );
+  }
+
+  // cartDel(indexNumber) {
+  //   demoCarts.removeAt(indexNumber);
+  //   notifyListeners();
+  // }
+  demoCartNumber() {}
+
+  plusCartItems(int number) {
+    number += 1;
+    notifyListeners();
   }
 
   //GOOGLE SIGN IN

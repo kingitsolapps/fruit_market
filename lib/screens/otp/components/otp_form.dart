@@ -4,15 +4,20 @@ import '../../../components/default_button.dart';
 import '../../../size_config.dart';
 
 import '../../../constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class OtpForm extends StatefulWidget {
-  const OtpForm({
+  OtpForm({
     Key? key,
+    this.phone,
   }) : super(key: key);
-
+  final String? phone;
+  // final String number = phone;
   @override
   _OtpFormState createState() => _OtpFormState();
 }
+
+FirebaseAuth _auth = FirebaseAuth.instance;
 
 class _OtpFormState extends State<OtpForm> {
   FocusNode? pin2FocusNode;
@@ -22,7 +27,34 @@ class _OtpFormState extends State<OtpForm> {
   @override
   void initState() {
     super.initState();
-    pin2FocusNode = FocusNode();
+    final phoneNumber = '+92${widget.phone}';
+    print(phoneNumber);
+    final user = _auth.verifyPhoneNumber(
+          phoneNumber: phoneNumber.toString(),
+          verificationCompleted: (PhoneAuthCredential credential) async {
+            await _auth.signInWithCredential(credential);
+          },
+          verificationFailed: (FirebaseAuthException e) {
+            if (e.code == 'invalid-phone-number') {
+              print('The provided phone number is not valid.');
+            }
+          },
+          codeSent: (String verificationId, int? resendToken) async {
+            // Update the UI - wait for the user to enter the SMS code
+            String smsCode = '';
+
+            // Create a PhoneAuthCredential with the code
+            PhoneAuthCredential credential = PhoneAuthProvider.credential(
+                verificationId: verificationId, smsCode: smsCode);
+
+            // Sign the user in (or link) with the credential
+            await _auth.signInWithCredential(credential);
+          },
+          codeAutoRetrievalTimeout: (String verificationId) {
+            // Auto-resolution timed out...
+          },
+        ),
+        pin2FocusNode = FocusNode();
     pin3FocusNode = FocusNode();
     pin4FocusNode = FocusNode();
   }
@@ -38,6 +70,7 @@ class _OtpFormState extends State<OtpForm> {
   void nextField(String value, FocusNode focusNode) {
     if (value.length == 1) {
       focusNode.requestFocus();
+      print(value);
     }
   }
 

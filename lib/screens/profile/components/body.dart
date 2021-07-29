@@ -89,8 +89,9 @@ class Body extends StatelessWidget {
                 icon: "assets/icons/share.svg",
                 press: () {
                   Get.defaultDialog(
+                      title: 'Congratulations',
                       middleText:
-                          'Wait This page is not added. Now working on it.');
+                          'Now Invite your friends and enjoy free shoping of 51 rupees');
                 },
               ),
               ProfileMenu(

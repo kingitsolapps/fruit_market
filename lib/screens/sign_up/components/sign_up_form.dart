@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fruit_market/providers/userLoginProvider.dart';
 import 'package:fruit_market/screens/home/home_screen.dart';
+import 'package:fruit_market/screens/otp/otp_screen.dart';
 import 'package:fruit_market/screens/sign_in/sign_in_screen.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -25,6 +26,9 @@ class _SignUpFormState extends State<SignUpForm> {
   String? firstName;
   String? lastName;
   bool remember = false;
+  String? verificationIdFromGoogle;
+  int _state = 0;
+  bool state = false;
 
   final List<String> errors = [];
 
@@ -51,7 +55,6 @@ class _SignUpFormState extends State<SignUpForm> {
         key: _formKey,
         child: Column(
           children: [
-           
             buildFirstNameFormField(),
             SizedBox(height: getProportionateScreenHeight(30)),
             buildLastNameFormField(),
@@ -165,15 +168,17 @@ class _SignUpFormState extends State<SignUpForm> {
                 // } else {
                 //   Get.snackbar('Error', 'Please Check the phone number');
                 // }
-                if (_formKey.currentState!.validate()) {
-                  _formKey.currentState!.save();
-                  // if all are valid then go to success screen
-                  // Navigator.pushNamed(context, CompleteProfileScreen.routeName);
-                  // Get.offAll(
-                  //   HomeScreen(),
-                  // );
-                  SignUpWithEmailPassword();
-                }
+                // if (_formKey.currentState!.validate()) {
+                //   _formKey.currentState!.save();
+                // if all are valid then go to success screen
+                // Navigator.pushNamed(context, CompleteProfileScreen.routeName);
+                // Get.offAll(
+                //   HomeScreen(),
+                // );
+                // SignUpWithEmailPassword();
+                Get.to(OtpScreen(this.phone));
+                // SignUpMe();
+                // }
               },
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
@@ -258,11 +263,15 @@ class _SignUpFormState extends State<SignUpForm> {
       },
       decoration: InputDecoration(
         labelText: "Phone Number",
-        hintText: "Enter your phone number",
+        hintText: "3001234567",
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Phone.svg"),
+        prefix: Text('+92',
+            style: TextStyle(
+              color: Colors.black,
+            )),
       ),
     );
   }
@@ -342,4 +351,139 @@ class _SignUpFormState extends State<SignUpForm> {
       Get.defaultDialog(title: "Error", middleText: e.toString());
     }
   }
+  // Future<void> verifyPhoneNo() async {
+  //   // await Firebase.initializeApp();
+  //   final PhoneCodeAutoRetrievalTimeout autoRetrieve = (String verId) {
+  //     this.verificationIdFromGoogle = verId;
+  //   };
+
+  //   final PhoneCodeSent smsCodeSent = (String verId, [int forceCodeResend]) {
+  //     this.verificationIdFromGoogle = verId;
+  //     print(verId);
+  //     setState(() {
+  //       state = false;
+  //     });
+
+  //     Navigator.push(
+  //         context, MaterialPageRoute(builder: (context) => OneTimePassword()));
+
+  //     // Navigator.push(
+  //     //     context,
+  //     //     MaterialPageRoute(
+  //     //         builder: (context) =>
+  //     //             OtpScreen(data: data, id: this.verificationIdFromGoogle)));
+
+  //     // Navigator.pushReplacement(
+  //     //     context,
+  //     //     MaterialPageRoute(
+  //     //         builder: (context) => OTPPage(
+  //     //           phoneNumber: userPhoneNo,
+  //     //           googleVerificationCode: this.verificationIdFromGoogle,
+  //     //           password: _password,
+  //     //           profile: _profile??" ",
+  //     //           userEmail: _userEmail,
+  //     //           userfirstname: _userfirstname,
+  //     //           userlastname: _userlastname,
+  //     //         )));
+  //   };
+
+  //   final PhoneVerificationCompleted verifiedSuccess =
+  //       (AuthCredential phoneAuthCredential) {
+  //     print('verified');
+  //   };
+
+  //   final PhoneVerificationFailed veriFailed =
+  //       (FirebaseAuthException exception) {
+  //     print('${exception.message}');
+  //   };
+
+  //   await FirebaseAuth.instance
+  //       .verifyPhoneNumber(
+  //           phoneNumber: "$number",
+  //           codeAutoRetrievalTimeout: autoRetrieve,
+  //           codeSent: smsCodeSent,
+  //           timeout: const Duration(seconds: 50),
+  //           verificationCompleted: verifiedSuccess,
+  //           verificationFailed: veriFailed)
+  //       .onError((error, stackTrace) {
+  //     setState(() {
+  //       state = false;
+  //     });
+  //     return showDialog(
+  //       context: context,
+  //       builder: (_) => LogoutOverlay(
+  //         message: "${error}",
+  //       ),
+  //     );
+  //   });
+  // }
+
+  Future<void> SignUpMe() async {
+    // await Firebase.initializeApp();
+    // FirebaseApp firebaseApp=new FirebaseApp.initialize;
+    final PhoneVerificationCompleted verifiedSuccess =
+        (AuthCredential phoneAuthCredential) {
+      print('verified');
+    };
+
+    final PhoneVerificationFailed verifiFailed =
+        (FirebaseAuthException exception) {
+      print('${exception.message}');
+    };
+
+    final PhoneCodeAutoRetrievalTimeout autoRetrieve = (String verId) {
+      this.verificationIdFromGoogle = verId;
+    };
+
+    ////
+    // (String verificationId, int? resendToken) async {
+    //         // Update the UI - wait for the user to enter the SMS code
+    //         String smsCode = 'xxxx';
+
+    //         // Create a PhoneAuthCredential with the code
+    //         PhoneAuthCredential credential = PhoneAuthProvider.credential(
+    //             verificationId: verificationId, smsCode: smsCode);
+
+    //         // Sign the user in (or link) with the credential
+    //         await _auth.signInWithCredential(credential);
+    //       },
+    //       codeAutoRetrievalTimeout: (String verificationId) {
+    //         // Auto-resolution timed out...
+    //       },
+    ///
+
+    final PhoneCodeSent smsCodeSent = (String verId, [int? forceCodeResend]) {
+      this.verificationIdFromGoogle = verId;
+      print(verId);
+      setState(() {
+        state = false;
+      });
+
+      // Navigator.push(
+      //     context, MaterialPageRoute(builder: (context) => OneTimePassword()));
+    };
+
+    FirebaseAuth.instance
+        .verifyPhoneNumber(
+          phoneNumber: phone!,
+          verificationCompleted: verifiedSuccess,
+          verificationFailed: verifiFailed,
+          codeSent: smsCodeSent,
+          codeAutoRetrievalTimeout: autoRetrieve,
+        )
+        .onError((error, stackTrace) => null);
+  }
+
+  // void registerMe() {
+  //   debugPrint('$email + $password');
+  //   FirebaseAuth.instance
+  //       .createUserWithEmailAndPassword(
+  //           email: email!.trim(), password: password!)
+  //       .then((value) {
+  //     Navigator.pushNamed(context, '/stylistprofile');
+  //     // Navigator.push(
+  //     //     context, MaterialPageRoute(builder: (context) => HomeScreen()));
+  //   });
+  // }
+
 }

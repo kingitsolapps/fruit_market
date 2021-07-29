@@ -11,6 +11,7 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+  
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -41,7 +42,7 @@ class _BodyState extends State<Body> {
                 ],
               ),
             ),
-            child: CartCard(cart: demoCarts[index]),
+            child: CartCard(cart: demoCarts[index],indexNumber: index),
           ),
         ),
       ),

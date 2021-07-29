@@ -48,7 +48,10 @@ dependencies:
   category_picker: ^1.0.1
   # flutter_stripe: ^1.2.0
   # stripe_sdk: ^5.0.0
-  pull_to_refresh: ^2.0.0
+  # pull_to_refresh: ^2.0.0
+  # pin_code_fields: ^7.3.0
+  # code_fields: ^0.0.3
+  pinput: ^1.2.0
 
 dev_dependencies:
   flutter_test:
