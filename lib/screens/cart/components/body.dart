@@ -29,6 +29,11 @@ class _BodyState extends State<Body> {
               onDismissed: (direction) {
                 setState(() {
                   demoCarts.removeAt(index);
+                  signInModal.resetTotalAmount();
+                  // signInModal
+                  //     .minusCartItems(widget.cart!.numOfItem!);
+                  // signInModal.minusCartItems(itemValue!);
+                  // itemValue = signInModal.itemValue;
                 });
               },
               background: Container(
