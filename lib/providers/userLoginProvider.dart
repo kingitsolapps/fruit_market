@@ -22,6 +22,7 @@ class UserSignInProvider extends ChangeNotifier {
   int unitValue = 1;
   double? totalamount = 0;
   double? grandTotal = 0;
+  int? itemValue;
   passHideShow() {
     passwordSecure ? passwordSecure = false : passwordSecure = true;
     notifyListeners();
@@ -30,6 +31,11 @@ class UserSignInProvider extends ChangeNotifier {
   bool confPasswordSecure = false;
   confPassHideShow() {
     confPasswordSecure ? confPasswordSecure = false : confPasswordSecure = true;
+    notifyListeners();
+  }
+
+  delCartItem(indexNumber) {
+    demoCarts.removeAt(indexNumber!);
     notifyListeners();
   }
 
@@ -52,6 +58,7 @@ class UserSignInProvider extends ChangeNotifier {
   resetTotalAmount() {
     totalamount = 0;
     grandTotal = 0;
+    notifyListeners();
   }
 
   priceTotal(price, int items) {
@@ -61,17 +68,19 @@ class UserSignInProvider extends ChangeNotifier {
     return total.toStringAsFixed(2);
   }
 
-  amountTotal(totalPrice) {
-    double total = totalamount! + totalPrice;
-    totalamount = total;
-    notifyListeners();
-    // totalAmoutOfShoping();
-  }
+  // amountTotal(totalPrice) {
+  //   double total = totalamount! + totalPrice;
+  //   totalamount = total;
+  //   notifyListeners();
+  //   return totalamount;
+  // }
 
-  double? totalAmoutOfShoping(total) {
+  totalAmoutOfShoping(double total) {
     grandTotal = totalamount! + total;
     totalamount = grandTotal;
     notifyListeners();
+    // return totalamount!.toStringAsFixed(2);
+    // total = 0;
     return totalamount;
   }
 
@@ -89,7 +98,17 @@ class UserSignInProvider extends ChangeNotifier {
 
   plusCartItems(int number) {
     number += 1;
+    itemValue = number;
     notifyListeners();
+  }
+
+  minusCartItems(int number) {
+    if (number > 1) {
+      number -= 1;
+    }
+    itemValue = number;
+    notifyListeners();
+    print(number);
   }
 
   //GOOGLE SIGN IN

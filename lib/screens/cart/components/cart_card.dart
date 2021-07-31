@@ -2,8 +2,10 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fruit_market/components/default_button.dart';
 import 'package:fruit_market/models/Product.dart';
 import 'package:fruit_market/providers/userLoginProvider.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import '../../../models/Cart.dart';
 
@@ -27,6 +29,17 @@ class CartCard extends StatefulWidget {
 class _CartCardState extends State<CartCard> {
   String? totalPrice;
   double? totalAmount;
+  int? itemValue;
+  @override
+  void initState() {
+    super.initState();
+    variableValues();
+  }
+
+  variableValues() {
+    itemValue = widget.cart!.numOfItem;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<UserSignInProvider>(builder: (context, signInModal, _) {
@@ -81,7 +94,7 @@ class _CartCardState extends State<CartCard> {
                                   color: kPrimaryColor),
                               children: [
                                 TextSpan(
-                                    text: " x${widget.cart!.numOfItem}",
+                                    text: " x$itemValue",
                                     style:
                                         Theme.of(context).textTheme.bodyText1),
                               ],
@@ -96,7 +109,7 @@ class _CartCardState extends State<CartCard> {
                                 signInModal
                                     .priceTotal(
                                       widget.cart!.product!.price,
-                                      widget.cart!.numOfItem!,
+                                      itemValue!,
                                     )
                                     .toString(),
                               ),
@@ -118,10 +131,13 @@ class _CartCardState extends State<CartCard> {
                     children: [
                       InkWell(
                         onTap: () {
-                          setState(() {
-                            print(widget.indexNumber);
-                            demoCarts.removeAt(widget.indexNumber!);
-                          });
+                          signInModal.delCartItem(widget.indexNumber);
+                          signInModal.resetTotalAmount();
+                          // setState(() {
+                          //   // print(widget.indexNumber);
+                          //   // demoCarts.removeAt(widget.indexNumber!);
+
+                          // });
                         },
                         child: SvgPicture.asset(
                           "assets/icons/Trash.svg",
@@ -131,7 +147,15 @@ class _CartCardState extends State<CartCard> {
                       Row(
                         children: [
                           InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              setState(() {
+                                signInModal.resetTotalAmount();
+                                // signInModal
+                                //     .minusCartItems(widget.cart!.numOfItem!);
+                                signInModal.minusCartItems(itemValue!);
+                                itemValue = signInModal.itemValue;
+                              });
+                            },
                             child: Container(
                               width: 30,
                               height: 30,
@@ -156,16 +180,18 @@ class _CartCardState extends State<CartCard> {
                             height: 30,
                             width: 30,
                             child: Center(
-                              child: Text("${widget.cart!.numOfItem}"),
+                              child: Text(itemValue.toString()),
                             ),
                           ),
                           //
                           InkWell(
                             onTap: () {
-                              
                               setState(() {
-                                signInModal
-                                    .plusCartItems(widget.cart!.numOfItem!);
+                                signInModal.resetTotalAmount();
+                                // itemValue =
+                                signInModal.plusCartItems(itemValue!);
+                                itemValue = signInModal.itemValue;
+
                                 // plusMethod(widget.cart!.numOfItem);
                               });
                             },
@@ -197,6 +223,96 @@ class _CartCardState extends State<CartCard> {
               ),
             ),
           ),
+          // ////////start bottom bar
+          // ///
+          // ///
+          // Container(
+          //   padding: EdgeInsets.symmetric(
+          //     vertical: getProportionateScreenWidth(15),
+          //     horizontal: getProportionateScreenWidth(30),
+          //   ),
+          //   // height: 174,
+          //   decoration: BoxDecoration(
+          //     color: Colors.white,
+          //     borderRadius: BorderRadius.only(
+          //       topLeft: Radius.circular(30),
+          //       topRight: Radius.circular(30),
+          //     ),
+          //     boxShadow: [
+          //       BoxShadow(
+          //         offset: Offset(0, -15),
+          //         blurRadius: 20,
+          //         color: Color(0xFFDADADA).withOpacity(0.15),
+          //       )
+          //     ],
+          //   ),
+          //   child: SafeArea(
+          //     child: Column(
+          //       mainAxisSize: MainAxisSize.min,
+          //       crossAxisAlignment: CrossAxisAlignment.start,
+          //       children: [
+          //         // Row(
+          //         //   children: [
+          //         //     Container(
+          //         //       padding: EdgeInsets.all(10),
+          //         //       height: getProportionateScreenWidth(40),
+          //         //       width: getProportionateScreenWidth(40),
+          //         //       decoration: BoxDecoration(
+          //         //         color: Color(0xFFF5F6F9),
+          //         //         borderRadius: BorderRadius.circular(10),
+          //         //       ),
+          //         //       child: SvgPicture.asset("assets/icons/receipt.svg"),
+          //         //     ),
+          //         //     Spacer(),
+          //         //     Text("Add voucher code"),
+          //         //     const SizedBox(width: 10),
+          //         //     Icon(
+          //         //       Icons.arrow_forward_ios,
+          //         //       size: 12,
+          //         //       color: kTextColor,
+          //         //     )
+          //         //   ],
+          //         // ),
+          //         // SizedBox(height: getProportionateScreenHeight(20)),
+          //         Row(
+          //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //           children: [
+          //             Text.rich(
+          //               TextSpan(
+          //                 text: "Total:\n",
+          //                 children: [
+          //                   TextSpan(
+          //                     text:
+          //                         // signInModal.totalAmoutOfShoping(0).toString(),
+          //                         signInModal.totalamount!.toStringAsFixed(2),
+          //                     style:
+          //                         TextStyle(fontSize: 16, color: Colors.black),
+          //                   ),
+          //                 ],
+          //               ),
+          //             ),
+          //             SizedBox(
+          //               width: getProportionateScreenWidth(180),
+          //               child: InkWell(
+          //                 onTap: () {
+          //                   Get.defaultDialog(middleText: 'Pressed');
+          //                 },
+          //                 child: DefaultButton(
+          //                   text: "Check Out",
+          //                   // press: () {},
+          //                 ),
+          //               ),
+          //             ),
+          //           ],
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
+
+          // ///
+          // ///
+          // ///end bottom bar
         ],
       );
     });

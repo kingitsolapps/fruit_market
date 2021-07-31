@@ -129,31 +129,31 @@ class _SignFormState extends State<SignForm> {
             // ),
             MaterialButton(
               onPressed: () async {
-                if (_formKey.currentState!.validate()) {
-                  _formKey.currentState!.save();
-                  // if all are valid then go to success screen
-                  KeyboardUtil.hideKeyboard(context);
+                // if (_formKey.currentState!.validate()) {
+                //   _formKey.currentState!.save();
+                //   // if all are valid then go to success screen
+                //   KeyboardUtil.hideKeyboard(context);
 
-                  //       Navigator.pushNamed(context, LoginSuccessScreen.routeName);
-                  try {
-                    final user = await _auth.signInWithEmailAndPassword(
-                        email: email!, password: password!);
-                    if (user != null) {
-                      Get.offAll(HomeScreen());
-                    } else {
-                      Get.defaultDialog(
-                        middleText:
-                            'Check your Email or password \nNo user found',
-                      );
-                    }
-                  } catch (e) {
-                    Get.defaultDialog(title: 'Error', middleText: e.toString());
-                  }
+                //   //       Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+                //   try {
+                //     final user = await _auth.signInWithEmailAndPassword(
+                //         email: email!, password: password!);
+                //     if (user != null) {
+                //       Get.offAll(HomeScreen());
+                //     } else {
+                //       Get.defaultDialog(
+                //         middleText:
+                //             'Check your Email or password \nNo user found',
+                //       );
+                //     }
+                //   } catch (e) {
+                //     Get.defaultDialog(title: 'Error', middleText: e.toString());
+                //   }
 
-                  // Get.offAll(
-                  //   HomeScreen(),
-                  // );
-                }
+                  Get.offAll(
+                    HomeScreen(),
+                  );
+                // }
               },
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
